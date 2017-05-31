@@ -1,0 +1,35 @@
+2.
+row, col
+6, 4
+6, 3
+6, 5
+7, 5
+8, 5
+8, 6
+8, 7
+8, 8
+7, 8
+6, 6
+5, 4
+4, 4
+
+4.
+row, col
+6, 4
+5, 4
+6, 5
+6, 3
+4, 4
+6, 6
+7, 5
+3, 4
+4, 5
+8, 5
+2, 4
+4, 6
+
+"How do the two algorithms differ...":
+mazestack is depth first, using a stack - it searches around the most recent coordinate that was entered, ignoring the other's until a particular path is exhausted of possibilities; searches one path quickly
+mazequeue is breadth first, using a queue - it searches around the least recent coordinate that was entered, basically going in concentric circles (in order of N E S W); searches multiple pathes at an equal rate
+
+

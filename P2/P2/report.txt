@@ -1,0 +1,251 @@
+"a description of the design of your doubly-linked list implementation...": dummy-nodes for head/tail, doubly linked, one ItemType value per node, not circular; empty sequence consists of m_head {prev: pointer to null, next: pointer to m_tail, value: is default}, m_tail {prev: pointer to m_head, next: pointer to null, value: is default};
+
+"pseudocode for non-trivial algorithms...":
+Sequence::Sequence(const Sequence& other)
+allocate head, tail
+link head's prev
+link tail's next
+repeatedly:
+    allocate new node
+    link node's prev
+    link prev's next
+    copy data
+    iterate to next node
+finish linking to tail
+copy size
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::~Sequence
+repeatedly:
+    save current node as temp
+    iterate forward
+    delete temp
+delete tail
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::operator=
+check not same
+    create copy of other seq
+    swap seq with copy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::insert(int pos, const ItemType& value)
+check for valid pos
+repeatedly:
+    iterate to node previous to pos where you will insert
+allocate new node
+link node to it's neighbors
+set node's value
+inc seq size
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::insert(const ItemType& value)
+repeatedly:
+    while value is greater than the current node and there are still nodes left
+        iterate one fwd
+insert at the position
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::erase
+check for valid pos
+repeatedly:
+    iterate towards the node
+link node's neighbors to each other
+deallocate node
+dec size
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::remove
+repeatedly:
+    while value is still in the seq
+        find the pos of the value and erase it
+return number of elements erased
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::get
+check for valid pos
+repeatedly:
+    iterate towards the node
+set value to node's value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::set
+check for valid pos
+repeatedly:
+    iterate towards the node
+set node's value to value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::find
+repeatedly:
+    iterate entire sequence, one node at a time
+        if node's value is equal to node, return pos
+        else, keep iterating till the end
+if hits the endw/o finding, return -1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sequence::swap
+3rd-temporary swap heads
+3rd-temporary swap sizes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+subsequence
+checks for empty seq2
+repeatedly:
+    iterate until it is no longer possible for seq2 to appear (bc its size)
+    while seq1 matches seq2
+        iterate till the end of seq2
+        if at the end of seq2, return
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+interleave
+while there is something left in either sequence
+    add part of seq1 to result if there is something there
+    add part of seq2 to result if there is something there
+
+"a list of test cases...":
+Sequence a;
+assert(a.empty() == true);//empty check when nothing
+assert(a.size() == 0);//size check when nothing
+
+std::cerr << "~~~INSERT~~~" << std::endl;
+
+assert(a.insert(-1, "69") == false);//no neg pos
+assert(a.insert(1, "69") == false);//no beyond pos
+assert(a.insert(0, "4") == true);//actually inserts at all
+assert(a.insert(0, "1") == true);//will add to start of non-trivial seq
+assert(a.insert(1, "2") == true);//will add to end of non-trivial seq
+assert(a.insert("0") == 0);//will find start
+assert(a.insert("3") == 3);//will find mid
+assert(a.insert("5") == 5);//will find end
+
+assert(a.empty() == false);//empty check when stuff
+assert(a.size() == 6);//size check when stuff
+
+a.dump();//visible check
+
+std::cerr << "~~~SET~~~" << std::endl;
+
+Sequence b(a);//copy construc
+assert(b.set(-1, "-1") == false);//no neg pos
+assert(b.set(6, "-1") == false);//no beyond pos
+assert(b.set(0, "-1") == true);//will set beg
+assert(b.set(3, "-1") == true);//will set mid
+assert(b.set(5, "-1") == true);//will set end
+a.dump();//visible check copy construc for independence
+b.dump();//visible check copy construc for independence
+
+std::cerr << "~~~ERASE~~~" << std::endl;
+assert(b.erase(-1) == false);//no neg pos
+assert(b.erase(6) == false);//no beyond pos
+assert(b.erase(0) == true);//no erase beg
+assert(b.erase(2) == true);//no erase mid
+assert(b.erase(3) == true);//no erase end
+b.dump();//visible check
+
+std::cerr << "~~~FIND~~~" << std::endl;
+assert(b.find("-1") == -1);//not found
+assert(b.find("1") == 0);//found beg
+assert(b.find("2") == 1);//found mid
+assert(b.find("4") == 2);//found end
+std::cerr << std::endl;
+
+std::cerr << "~~~REMOVE~~~" << std::endl;
+b.insert("0");
+b.insert("1");
+b.insert("1");
+b.insert("1");
+b.dump();//dumped to compare it w end result
+assert(b.remove("-1") == 0);//not found
+assert(b.remove("0") == 1);//removes beg
+assert(b.remove("1") == 4);//removes multiples
+assert(b.remove("2") == 1);//removes mid
+assert(b.remove("4") == 1);//removes end and all
+b.dump();//visible check
+
+std::cerr << "~~~GET~~~" << std::endl;
+std::string str = "no";
+assert(a.get(-1, str) == false && str == "no");//no neg pos
+assert(a.get(6, str) == false && str == "no");//no beyond pos
+assert(a.get(0, str) == true && str == "0");//get beg
+assert(a.get(2, str) == true && str == "2");//get mid
+assert(a.get(5, str) == true && str == "5");//get end
+a.dump();//verify const func + helpful to look at
+
+std::cerr << "~~~SWAP~~~" << std::endl;
+a.dump();
+b.dump();
+a.swap(b);//swaps
+a.dump();
+b.dump();
+b.swap(b);//swap safe for itself
+b.dump();
+
+std::cerr << "~~~OPERATOR=~~~" << std::endl;
+a.dump();
+b.dump();
+a = b;//equals
+a.dump();
+b.dump();
+Sequence c;
+a = c;//equals works on empty
+c.dump();
+a.dump();
+a = a;//equals safe for itself
+a.dump();
+
+std::cerr << "~~~SUBSEQUENCE~~~" << std::endl;
+Sequence one;//0 1 2 3
+Sequence two;//1 2
+one.insert("0");
+one.insert("1");
+one.insert("2");
+one.insert("3");
+one.insert("4");
+one.insert("5");
+assert(subsequence(one, two) == -1);//empty seq2
+two.insert("-1");
+assert(subsequence(one, two) == -1);//no k exists
+two.set(0, "0");
+assert(subsequence(one, two) == 0);//finds beginning, length 1
+two.insert("1");
+assert(subsequence(one, two) == 0);//finds beginning, length 2
+two.remove("0");
+assert(subsequence(one, two) == 1);//finds mid, length 1
+two.insert("2");
+assert(subsequence(one, two) == 1);//finds mid, length 2
+two.insert("3");
+two.insert("4");
+two.insert("5");
+assert(subsequence(one, two) == 1);//finds mid, length 5, touching end
+two.set(4, "6");
+assert(subsequence(one, two) == -1);//no k exists, touching end
+two.insert("0");
+assert(subsequence(one, two) == -1);//no k exists, touching beg/end
+two.set(5, "5");
+assert(subsequence(one, two) == 0);//finds beginning, length full, touching beg/end
+Sequence ver;
+Sequence ify;
+ver.insert(0, "30");
+ver.insert(1, "21");
+ver.insert(2, "63");
+ver.insert(3, "42");
+ver.insert(4, "17");
+ver.insert(5, "63");
+ver.insert(6, "17");
+ver.insert(7, "29");
+ver.insert(8, "8");
+ver.insert(9, "32");
+ify.insert(0, "63");
+ify.insert(1, "17");
+ify.insert(2, "29");
+assert(subsequence(ver, ify) == 5);
+ify.set(0, "17");
+ify.set(1, "63");
+assert(subsequence(ver, ify) == -1);
+
+std::cerr << "~~~INTERWEAVE~~~" << std::endl;
+ver.dump();//30 21 63 42 17 63 17 29 8 32
+ify.dump();//17 63 29
+Sequence end;
+interleave(ver, ify, end);//diff length
+end.dump();//30 17 21 63 63 29 42 17 63 17 29 8 32
+interleave(end, ify, end);//aliasing
+end.dump();//30 17 17 63 21 29 63 63 29 42 17 63 17 29 8 32
+interleave(end, end, end);//aliasing and same length
+end.dump();//doubles
+Sequence empty;
+interleave(end, empty, end);//empty, so ret copy
+end.dump();//doubles
+
+
+
+

@@ -1,0 +1,17 @@
+colony: 0
+
+start:
+	moveForward
+	if i_am_standing_on_food then goto on_food
+	generateRandomNumber 5
+	if last_random_number_was_zero then goto face_new_direction
+	goto start
+
+face_new_direction:
+	faceRandomDirection
+	goto start
+
+on_food:
+	pickUpFood
+	eatFood
+	goto start

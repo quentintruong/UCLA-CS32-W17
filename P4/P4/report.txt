@@ -1,0 +1,14 @@
+MyMap:
+associate() n total elements, O(logn)
+find() n total elements, O(logn)
+
+AttractionMapper:
+init() n total street elements, a total attractions, O(n+aloga)
+getGeoCoord() a total attractions, O(loga)
+
+SegmentMapper:
+init() n total street elements, a total attractions, O((n+a)log(n+a))
+getSegments() n total street elements, a total attractions, O(log(n+a))
+
+Navigator:
+navigate() n total street elements, a total attractions, O((n+a)log(n+a))

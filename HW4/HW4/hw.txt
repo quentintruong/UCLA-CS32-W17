@@ -1,0 +1,22 @@
+2.
+Lacks comparison operator for Complex.
+Add the following to Complex's class so that it will compile.
+bool operator>(const Complex& r) const
+{
+  return true;//not always correct
+}
+
+3b.
+recursive calls to listAll would not know the previous parts of the path and would not be able to print out the "Help" part of "Help/Index"
+
+4a.
+O(N^3)
+
+4b.
+O(N^3) b/c for (n) * for (i where i = n) * for (n)
+
+5a.
+O(N) b/c for (n1)
+
+5b.
+O(N) same

@@ -1,0 +1,12 @@
+colony: 0
+
+start:
+	moveForward
+	emitPheromone
+	if i_smell_danger_in_front_of_me then goto spin
+	goto start
+
+spin:
+	faceRandomDirection
+	goto spin
+
