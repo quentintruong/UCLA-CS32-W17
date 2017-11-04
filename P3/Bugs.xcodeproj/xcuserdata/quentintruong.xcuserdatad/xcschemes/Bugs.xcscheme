@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -45,6 +46,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -63,23 +65,23 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/quentintruong/Desktop/P3/DerivedData/Bugs/Build/Products/Debug/Assets/field.txt"
+            argument = "/Users/quentintruong/Desktop/UCLA-CS32-W17/P3/DerivedData/Bugs/Build/Products/Debug/Assets/field.txt"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/quentintruong/Desktop/P3/DerivedData/Bugs/Build/Products/Debug/Assets/0"
+            argument = "/Users/quentintruong/Desktop/UCLA-CS32-W17/P3/DerivedData/Bugs/Build/Products/Debug/Assets/0.bug"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/quentintruong/Desktop/P3/DerivedData/Bugs/Build/Products/Debug/Assets/1.bug"
+            argument = "/Users/quentintruong/Desktop/UCLA-CS32-W17/P3/DerivedData/Bugs/Build/Products/Debug/Assets/1.bug"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/quentintruong/Desktop/P3/DerivedData/Bugs/Build/Products/Debug/Assets/2.bug"
+            argument = "/Users/quentintruong/Desktop/UCLA-CS32-W17/P3/DerivedData/Bugs/Build/Products/Debug/Assets/2.bug"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/quentintruong/Desktop/P3/DerivedData/Bugs/Build/Products/Debug/Assets/3.bug"
+            argument = "/Users/quentintruong/Desktop/UCLA-CS32-W17/P3/DerivedData/Bugs/Build/Products/Debug/Assets/3.bug"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
